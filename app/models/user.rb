@@ -20,8 +20,9 @@ class User < ApplicationRecord
     # end 
 
     def total_like_count
-        c = 0
-        self.posts.map { |s|c += s.like_count }
-        return c
+        # c = 0
+        # self.posts.each { |s|c += s.like_count }
+        # return c
+        self.posts.sum(:like_count)
     end
 end

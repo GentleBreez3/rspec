@@ -4,9 +4,9 @@ class Post < ApplicationRecord
     validates :title, :content, presence: true
 
     scope :has_comments, -> {joins(:comments)}
-    scope :good_posts, -> {where("posts.like_count >= ?", 10)}
+    scope :good_posts, -> {where("like_count >= ?", 10)}
     
-    # def user_has_commented
-        
-    # end
+    def user_has_commented  
+        User.joins(:comments).where(comments: {post_id: id}).distinct
+    end
 end
